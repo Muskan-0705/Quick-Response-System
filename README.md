@@ -82,10 +82,3 @@ A React Native Emergency Response Application built with Expo. This app allows u
 *   **AlertsScreen:** History and status of triggered alerts.
 *   **ProfileScreen:** User details and settings.
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-## 📄 License
-
-This project is licensed under the MIT License.
