@@ -41,7 +41,7 @@ A React Native Emergency Response Application built with Expo. This app allows u
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
+    git clone <https://github.com/Muskan-0705/Quick-Response-System.git>
     cd Quick-Reshponse-System
     ```
 
