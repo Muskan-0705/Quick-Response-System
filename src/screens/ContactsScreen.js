@@ -1,4 +1,3 @@
-// src/screens/ContactsScreen.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Linking, Modal, TextInput, Alert, Platform, KeyboardAvoidingView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -12,8 +11,6 @@ const ContactsScreen = ({ navigation }) => {
   const [contacts, setContacts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [editingContact, setEditingContact] = useState(null);
-  
-  // Form State
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [relation, setRelation] = useState('');
@@ -52,7 +49,6 @@ const ContactsScreen = ({ navigation }) => {
       Alert.alert('Missing Fields', 'Please fill all fields');
       return;
     }
-    
     try {
       if (editingContact) {
         await updateContact(user.uid, editingContact.id, { name, phone, relation });
@@ -68,21 +64,21 @@ const ContactsScreen = ({ navigation }) => {
 
   const confirmDelete = (contactId) => {
     if (Platform.OS === 'web') {
-        const confirmed = window.confirm('Are you sure you want to delete this contact?');
-        if (confirmed) {
-            deleteContact(user.uid, contactId).catch(e => console.error(e));
-        }
+      const confirmed = window.confirm('Are you sure you want to delete this contact?');
+      if (confirmed) {
+        deleteContact(user.uid, contactId).catch(e => console.error(e));
+      }
     } else {
-        Alert.alert('Delete Contact', 'Are you sure you want to delete this contact?', [
+      Alert.alert('Delete Contact', 'Are you sure you want to delete this contact?', [
         { text: 'Cancel', style: 'cancel' },
         { text: 'Delete', style: 'destructive', onPress: async () => {
-            try {
-                await deleteContact(user.uid, contactId);
-            } catch (e) {
-                console.error('Failed to delete contact', e);
-            }
+          try {
+            await deleteContact(user.uid, contactId);
+          } catch (e) {
+            console.error('Failed to delete contact', e);
+          }
         }}
-        ]);
+      ]);
     }
   };
 
@@ -99,7 +95,6 @@ const ContactsScreen = ({ navigation }) => {
     <View style={styles.bg}>
       <LinearGradient colors={['#0A0A14', '#0D0D1A']} style={StyleSheet.absoluteFillObject} />
 
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={22} color="#fff" />
@@ -115,7 +110,7 @@ const ContactsScreen = ({ navigation }) => {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         renderItem={({ item }) => (
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.contactCard}
             onPress={() => openModal(item)}
             onLongPress={() => confirmDelete(item.id)}
@@ -151,7 +146,7 @@ const ContactsScreen = ({ navigation }) => {
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.modalBg}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>{editingContact ? 'Edit Contact' : 'Add Contact'}</Text>
-            
+
             <TextInput
               style={styles.input}
               placeholder="Name"
@@ -237,8 +232,6 @@ const styles = StyleSheet.create({
   },
   emptyContainer: { alignItems: 'center', marginTop: 80, gap: 12 },
   emptyText: { color: '#444', fontSize: 16 },
-  
-  // Modal styles
   modalBg: { flex: 1, backgroundColor: 'rgba(0,0,0,0.6)', justifyContent: 'center', padding: 20 },
   modalContent: {
     backgroundColor: '#13132A', borderRadius: 20, padding: 24,

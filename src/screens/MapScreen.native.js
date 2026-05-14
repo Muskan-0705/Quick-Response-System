@@ -1,5 +1,3 @@
-// src/screens/MapScreen.native.js
-// This file is used for Android & iOS only.
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import {
   View,
@@ -86,7 +84,6 @@ const MapScreen = ({ navigation }) => {
         renderToHardwareTextureAndroid
       />
 
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={22} color="#fff" />
@@ -95,7 +92,6 @@ const MapScreen = ({ navigation }) => {
         <View style={[styles.statusDot, { backgroundColor: tracking ? '#4ADE80' : '#555' }]} />
       </View>
 
-      {/* Loading */}
       {loading ? (
         <View style={styles.centered}>
           <ActivityIndicator size="large" color="#6C63FF" />
@@ -148,7 +144,6 @@ const MapScreen = ({ navigation }) => {
             </Marker>
           </MapView>
 
-          {/* Info overlay */}
           <View style={styles.infoCard}>
             <View style={styles.infoRow}>
               <Ionicons name="navigate" size={14} color="#6C63FF" />
@@ -164,7 +159,6 @@ const MapScreen = ({ navigation }) => {
             </View>
           </View>
 
-          {/* FABs */}
           <View style={styles.fabStack}>
             <TouchableOpacity style={styles.fab} onPress={centerMap}>
               <Ionicons name="locate" size={22} color="#fff" />

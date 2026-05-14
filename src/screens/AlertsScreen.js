@@ -1,10 +1,9 @@
-// src/screens/AlertsScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Linking } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Linking, Alert, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../context/AuthContext';
-import { subscribeToAlerts } from '../services/alertsService';
+import { subscribeToAlerts, deleteAlert } from '../services/alertsService';
 
 const formatDate = (dateStr) => {
   if (!dateStr) return '';
@@ -30,6 +29,26 @@ const AlertsScreen = ({ navigation }) => {
       return () => unsubscribe();
     }
   }, [user]);
+
+  const confirmDelete = (alertId) => {
+    if (Platform.OS === 'web') {
+      const confirmed = window.confirm('Are you sure you want to delete this alert?');
+      if (confirmed && user?.uid) {
+        deleteAlert(user.uid, alertId).catch(e => console.error(e));
+      }
+    } else {
+      Alert.alert('Delete Alert', 'Are you sure you want to delete this alert?', [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Delete', style: 'destructive', onPress: async () => {
+          try {
+            if (user?.uid) await deleteAlert(user.uid, alertId);
+          } catch (e) {
+            console.error('Failed to delete alert', e);
+          }
+        }}
+      ]);
+    }
+  };
 
   return (
     <View style={styles.bg}>
@@ -65,6 +84,9 @@ const AlertsScreen = ({ navigation }) => {
               </TouchableOpacity>
             )}
           </View>
+          <TouchableOpacity onPress={() => confirmDelete(item.id)} style={styles.deleteBtn}>
+            <Ionicons name="trash-outline" size={18} color="#FF6B6B" />
+          </TouchableOpacity>
         </View>
       )}
       ListEmptyComponent={
@@ -94,6 +116,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center',
     backgroundColor: '#13132A', borderRadius: 16,
     padding: 16, borderWidth: 1, borderColor: '#2A2A3C', gap: 14,
+  },
+  deleteBtn: {
+    width: 36, height: 36, borderRadius: 18,
+    backgroundColor: '#FF6B6B15', alignItems: 'center', justifyContent: 'center',
+    borderWidth: 1, borderColor: '#FF6B6B33',
   },
   alertDot: { width: 12, height: 12, borderRadius: 6 },
   alertInfo: { flex: 1 },

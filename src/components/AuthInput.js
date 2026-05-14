@@ -1,4 +1,3 @@
-// src/components/AuthInput.js
 import React, { useState, memo } from 'react';
 import {
   View,
@@ -45,7 +44,6 @@ const AuthInput = memo(({
           autoCapitalize={autoCapitalize}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          // 🔑 These two prevent blinking on Android
           underlineColorAndroid="transparent"
           blurOnSubmit={false}
         />
@@ -90,7 +88,6 @@ const styles = StyleSheet.create({
     flex: 1,
     color: '#fff',
     fontSize: 15,
-    // 🔑 Prevent cursor/text blink artifacts
     textAlignVertical: 'center',
   },
 });

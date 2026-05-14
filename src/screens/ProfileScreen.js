@@ -1,6 +1,5 @@
-// src/screens/ProfileScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, Switch, Share, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, Switch, Share, TextInput, ScrollView } from 'react-native';
 import * as Location from 'expo-location';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -36,7 +35,7 @@ const ProfileScreen = ({ navigation }) => {
         showAlert('Permission Denied', 'Location permission is required to share your location.');
         return;
       }
-      
+
       if (Platform.OS !== 'web') {
         try {
           const providerStatus = await Location.getProviderStatusAsync();
@@ -59,7 +58,6 @@ const ProfileScreen = ({ navigation }) => {
       if (location) {
         const mapLink = `https://www.google.com/maps?q=${location.coords.latitude},${location.coords.longitude}`;
         const msg = `I am safe. Here is my current location: ${mapLink}`;
-        
         if (Platform.OS === 'web') {
           showAlert('Location Link (Copy this)', mapLink);
         } else {
@@ -93,7 +91,7 @@ const ProfileScreen = ({ navigation }) => {
         <View style={{ width: 40 }} />
       </View>
 
-      {/* Avatar */}
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
       <View style={styles.avatarSection}>
         <View style={styles.avatarCircle}>
           <Text style={styles.avatarText}>{initials}</Text>
@@ -106,7 +104,6 @@ const ProfileScreen = ({ navigation }) => {
         </View>
       </View>
 
-      {/* Menu Items */}
       <View style={styles.menu}>
         <View style={styles.menuItem}>
           <View style={[styles.menuIcon, { backgroundColor: '#FF3B3B22', borderColor: '#FF3B3B44' }]}>
@@ -161,11 +158,11 @@ const ProfileScreen = ({ navigation }) => {
         <MenuItem icon="lock-closed" label="Change Password" color="#A78BFA" onPress={() => showAlert('Security', 'A password reset link has been sent to your registered email.')} />
       </View>
 
-      {/* Logout */}
       <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
         <Ionicons name="log-out-outline" size={20} color="#FF6B6B" />
         <Text style={styles.logoutText}>Sign Out</Text>
       </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };

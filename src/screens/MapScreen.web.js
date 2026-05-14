@@ -1,5 +1,3 @@
-// src/screens/MapScreen.web.js
-// This file is used for Web only — react-native-maps is NOT imported here.
 import React, { useEffect, useState, useCallback } from 'react';
 import {
   View,
@@ -53,7 +51,6 @@ const MapScreen = ({ navigation }) => {
         style={StyleSheet.absoluteFillObject}
       />
 
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={22} color="#fff" />
@@ -63,7 +60,6 @@ const MapScreen = ({ navigation }) => {
       </View>
 
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
-        {/* Map icon */}
         <View style={styles.iconBox}>
           <Ionicons name="map" size={60} color="#6C63FF" />
         </View>
@@ -94,25 +90,12 @@ const MapScreen = ({ navigation }) => {
 
         ) : location ? (
           <>
-            {/* Coordinate Cards */}
             <View style={styles.coordCard}>
-              <CoordRow
-                icon="navigate"
-                label="Latitude"
-                value={location.coords.latitude.toFixed(6)}
-              />
+              <CoordRow icon="navigate" label="Latitude" value={location.coords.latitude.toFixed(6)} />
               <View style={styles.sep} />
-              <CoordRow
-                icon="compass"
-                label="Longitude"
-                value={location.coords.longitude.toFixed(6)}
-              />
+              <CoordRow icon="compass" label="Longitude" value={location.coords.longitude.toFixed(6)} />
               <View style={styles.sep} />
-              <CoordRow
-                icon="radio-button-on"
-                label="Accuracy"
-                value={`±${Math.round(location.coords.accuracy ?? 0)} m`}
-              />
+              <CoordRow icon="radio-button-on" label="Accuracy" value={`±${Math.round(location.coords.accuracy ?? 0)} m`} />
               <View style={styles.sep} />
               <CoordRow
                 icon="trending-up"
@@ -125,13 +108,11 @@ const MapScreen = ({ navigation }) => {
               />
             </View>
 
-            {/* Open in Google Maps */}
             <TouchableOpacity style={styles.gmapsBtn} onPress={openGoogleMaps}>
               <Ionicons name="open-outline" size={18} color="#fff" />
               <Text style={styles.gmapsBtnText}>Open in Google Maps</Text>
             </TouchableOpacity>
 
-            {/* Refresh */}
             <TouchableOpacity style={styles.refreshBtn} onPress={requestAndFetch}>
               <Ionicons name="refresh" size={16} color="#6C63FF" />
               <Text style={styles.refreshText}>Refresh Location</Text>
@@ -166,9 +147,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1A1A2E', alignItems: 'center', justifyContent: 'center',
   },
   headerTitle: { flex: 1, fontSize: 18, fontWeight: '700', color: '#fff' },
-  body: {
-    alignItems: 'center', padding: 24, paddingBottom: 48,
-  },
+  body: { alignItems: 'center', padding: 24, paddingBottom: 48 },
   iconBox: {
     width: 100, height: 100, borderRadius: 50,
     backgroundColor: '#6C63FF22', borderWidth: 1.5, borderColor: '#6C63FF44',
@@ -192,16 +171,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#13132A', borderRadius: 20,
     borderWidth: 1, borderColor: '#2A2A3C', marginBottom: 16,
   },
-  coordRow: {
-    flexDirection: 'row', alignItems: 'center', padding: 16, gap: 14,
-  },
+  coordRow: { flexDirection: 'row', alignItems: 'center', padding: 16, gap: 14 },
   coordIcon: {
     width: 36, height: 36, borderRadius: 18,
     backgroundColor: '#6C63FF22', alignItems: 'center', justifyContent: 'center',
   },
-  coordLabel: {
-    fontSize: 11, color: '#666', textTransform: 'uppercase', letterSpacing: 0.8,
-  },
+  coordLabel: { fontSize: 11, color: '#666', textTransform: 'uppercase', letterSpacing: 0.8 },
   coordValue: { fontSize: 16, color: '#fff', fontWeight: '700', marginTop: 2 },
   sep: { height: 1, backgroundColor: '#1A1A2E', marginHorizontal: 8 },
   gmapsBtn: {

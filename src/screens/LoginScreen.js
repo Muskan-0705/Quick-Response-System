@@ -1,4 +1,3 @@
-// src/screens/LoginScreen.js
 import React, { useState, useCallback } from 'react';
 import {
   View,
@@ -21,7 +20,6 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // useCallback — handlers stable rehte hain, unnecessary re-render nahi hota
   const handleEmailChange = useCallback((val) => setEmail(val), []);
   const handlePasswordChange = useCallback((val) => setPassword(val), []);
 
@@ -47,12 +45,10 @@ const LoginScreen = ({ navigation }) => {
   const goToSignup = useCallback(() => navigation.navigate('Signup'), [navigation]);
 
   return (
-    // 🔑 View as bg instead of LinearGradient re-rendering on every keystroke
     <View style={styles.bg}>
       <LinearGradient
         colors={['#0D0D1A', '#12122A', '#0D0D1A']}
         style={StyleSheet.absoluteFillObject}
-        // renderToHardwareTextureAndroid prevents gradient flicker
         renderToHardwareTextureAndroid
       />
       <KeyboardAvoidingView
@@ -65,7 +61,6 @@ const LoginScreen = ({ navigation }) => {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-          {/* Logo / Brand */}
           <View style={styles.logoArea}>
             <View style={styles.logoCircle}>
               <Ionicons name="flash" size={36} color="#6C63FF" />
@@ -74,7 +69,6 @@ const LoginScreen = ({ navigation }) => {
             <Text style={styles.tagline}>Welcome back 👋</Text>
           </View>
 
-          {/* Card */}
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Sign In</Text>
 

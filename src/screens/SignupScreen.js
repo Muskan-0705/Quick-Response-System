@@ -1,4 +1,3 @@
-// src/screens/SignupScreen.js
 import React, { useState, useCallback } from 'react';
 import {
   View,
@@ -23,7 +22,6 @@ const SignupScreen = ({ navigation }) => {
   const [confirm, setConfirm] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Stable handlers — no re-render on every keystroke
   const handleNameChange = useCallback((val) => setName(val), []);
   const handleEmailChange = useCallback((val) => setEmail(val), []);
   const handlePasswordChange = useCallback((val) => setPassword(val), []);
@@ -71,7 +69,6 @@ const SignupScreen = ({ navigation }) => {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-          {/* Logo / Brand */}
           <View style={styles.logoArea}>
             <View style={styles.logoCircle}>
               <Ionicons name="person-add" size={34} color="#6C63FF" />
@@ -80,7 +77,6 @@ const SignupScreen = ({ navigation }) => {
             <Text style={styles.tagline}>Create your account ✨</Text>
           </View>
 
-          {/* Card */}
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Sign Up</Text>
 
